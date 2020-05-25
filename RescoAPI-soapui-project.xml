@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3ef933a8-b79e-4e0e-b6e1-1d5e01b3d409" activeEnvironment="Default" name="RescoAPI" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="0da62a1f-511b-43e1-b14f-90f3c3131d88" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:9999" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:9999</con:endpoint></con:endpoints><con:resource name="Interfaceresco.aspx" path="" id="c74cf0af-496d-4d97-a810-9f436c54efc7"><con:settings/><con:parameters/><con:method name="Interfaceresco.aspx 1" id="06a2a44b-058e-4b72-b5ba-398b1651fbae" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>text/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>ResAddBooking</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/xml</con:mediaType><con:params/><con:element>ReqAddBooking</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>405</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="0cfacd24-daa2-4c35-a6ee-bd50180d9300" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:9999/interfaceresco.aspx</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="6c2c93aa-c12f-47df-8853-80e8f5096bd0" name="Booking"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="3fc9f597-cb25-40f8-804a-b96a2b958c15" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ReqActivateBooking" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="ReqAddBooking_001" id="ee05cfb0-b5c9-4168-bf58-90268158423b"><con:settings/><con:config service="http://localhost:9999" methodName="Interfaceresco.aspx 1" resourcePath="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="ReqAddBooking_001" id="f1c55b63-0677-4062-ba65-c1c091eb5804" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="RecordRequestRepresentations">true</con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9999/interfaceresco.aspx</con:endpoint><con:request><![CDATA[<?xml version="1.0" ?>
+<ReqAddBooking>
+
+  <!-- User login information (either Login/Password or SessionId is required) -->
+  <User>
+    <Login>systemsupport</Login>                          <!-- User login [required, string(50)] {usrLogin} -->
+    <Password>res2sup7</Password>                  <!-- User password [required, string(20)] {usrConvertPassword} -->
+  </User>
+
+  <!-- Booking general information -->
+  <Booking>
+    <ExternalId>BKGEXT5564</ExternalId>            <!-- Booking external id [optional, string(20)] {rebImportCode1} -->
+    <Number>1234567899</Number>                    <!-- Booking number [optional, string(20)] {rebNo} -->
+    <Status>I</Status>                             <!-- Booking status, domain: I-inquiry, O-optional, R-reserved, V-verified, W-waitlist [required, string(1)] -->
+    <Currency>USD</Currency>                       <!-- Booking currency, if not provided agency currency will be used, ISO 3-letter currency code [optional, string(3)] {rebTypCurrencyId.typId} -->
+    <BillingId>007</BillingId>                     <!-- CRS billing folio id [optional, integer] {rebFolBillingId} -->
+    <BookingType>BKT</BookingType>                 <!-- Booking type [optional, string(10)] {rebTypBookingTypeId.typId} -->
+    <MarketingType>2ndPAX</MarketingType>          <!-- Marketing type [optional, string(10)] {rebTypMarketingTypeId.typId} -->
+    <SourceType>AGT</SourceType>                   <!-- Source type [optional, string(10)] {rebTypSourceTypeId.typId} -->
+    <OriginType>API</OriginType>                   <!-- Origin type [optional, string(10)] {rebTypOriginTypeId.typId} -->
+    <ReservationType>BKY</ReservationType>	       <!-- Reservation type [optional, string(10)] {rebTypReservationTypeId.typId} -->
+    <PaymentType>GROSS</PaymentType>               <!-- Payment type [optional, string(10)] {rebTypPaymentTypeId.typId} -->
+    <Flex01>INFO1</Flex01>                         <!-- Information field #1 [optional, string(50)] {rebFlex01} -->
+    <Flex02>INFO2</Flex02>                         <!-- Information field #2 [optional, string(50)] {rebFlex02} -->
+    <Flex03>INFO3</Flex03>                         <!-- Information field #3 [optional, string(50)] {rebFlex03} -->
+    <Comments>BOOKING WAS MADE BY API SEQUENCE AUTOMATION</Comments>               <!-- Comments [optional, string(200)] {rebComments} -->
+  </Booking>
+  
+  <!-- Booking agency information -->
+  <Agency>
+    <AgentId>0</AgentId>                       <!-- CRS agent id, if set to 0 agent will be determined based on login/pass [required, integer] {rebFolAgentId} -->
+    <GroupId>0</GroupId>                       <!-- CRS group id, 0 if not applicable [required, integer] {rebFolGroupId} -->
+  </Agency>
+  
+</ReqAddBooking>]]></con:request><con:originalUri>http://localhost/interfaceresco.aspx</con:originalUri><con:assertion type="Simple Contains" id="18e04ad0-3763-4513-921f-c8f3030fbdb8" name="Contains"><con:configuration><token>Booking</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple NotContains" id="9e9c43e8-8965-4282-a28d-4a0943138002" name="Not Contains"><con:configuration><token>&lt;Status>R&lt;/Status>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="XPath Match" id="d21fbf3c-6d2f-481c-b799-5a4426514ee2" name="XPath Match"><con:configuration><path>//Status</path><content>A</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="a6e83c2d-1751-4518-958d-0a471e287b22" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="03999c8d-2252-485f-99b9-18c04da27ccb" name="Response SLA"><con:configuration><SLA>20000</SLA></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="d6f79b97-9ff8-4d7b-a1a5-a5b014288f27" name="Script Assertion"><con:configuration><scriptText>//check response time
+assert messageExchange.timeTaken  &lt;40000
+
+//check for TimeTaken
+ log.info messageExchange.getTimeTaken()  
+
+//validate response nodes
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils( context )
+def requsetHolder = groovyUtils.getXmlHolder( messageExchange.requestContent )
+def responseHolder = groovyUtils.getXmlHolder( messageExchange.responseContent )
+assert responseHolder.getNodeValue("//Status") == "A"</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="BookingId" id="949bbeed-05e6-4e74-a2ac-9d6e0a49e395"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>BookingId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>ReqAddBooking_001</con:sourceStep><con:sourcePath>//BookingId</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>ReqAssignFolio_002</con:targetStep><con:targetPath>//BookingId</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="ReqAssignFolio_002" id="9dce6968-1841-4811-93d3-8bd6badccbf2"><con:settings/><con:config service="http://localhost:9999" methodName="Interfaceresco.aspx 1" resourcePath="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="ReqAssignFolio_002" id="100a78b6-0c3c-4afe-96a9-9aa1843a0f31" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9999/interfaceresco.aspx</con:endpoint><con:request><![CDATA[<ReqAssignFolio>
+
+  <!-- User login information (either Login/Password or SessionId is required) -->
+  <User>
+    <Login>miriam</Login>                          <!-- User login [required, string(50)] {usrLogin} -->
+    <Password>res2sup7</Password>                  <!-- User password [required, string(20)] {usrConvertPassword} -->
+  </User>
+
+  <!-- Booking information -->
+  <Booking>
+    <BookingId>100889</BookingId>           <!-- CRS booking id [required, integer] {rebUId} -->
+  </Booking>
+
+  <!-- Multiple folio (travelers) -->
+  <FolioList>
+    <Folio>
+      <!-- Basic folio details -->
+      <TravelerId>0</TravelerId>                   <!-- CRS unique folio-booking id, 0 to add folio to a booking, >0 when replacing folio in a booking [required, integer] {refUId} -->
+      <FolioId>464758</FolioId>                    <!-- CRS folio id (unique if >0, default age group if <0) [required, integer] {folUId} -->
+      <Document1Id>30133</Document1Id>             <!-- CRS id of a default document #1 [optional, integer] {refPidDocument1Id} -->
+      <!--<Document2Id>30132</Document2Id>-->              <!-- CRS id of a default document #2 [optional, integer] {refPidDocument2Id} -->
+      <Primary>1</Primary>                         <!-- Primary folio indicator, domain: 1-primary, 0-non-primary [required, integer] {refPrimary} -->
+      <ProtectionNo>D1</ProtectionNo>              <!-- Protection number [optional, string(15)] {refTravelProtectionNo} -->
+      <Flex01>john@jones.net</Flex01>              <!-- Flex field [optional, string(50) {refFlex01} -->
+    </Folio>
+    <Folio>
+      <!-- Basic folio details -->
+      <TravelerId>0</TravelerId>                   <!-- CRS unique folio-booking id, 0 to add folio to a booking, >0 when replacing folio in a booking [required, integer] {refUId} -->
+      <FolioId>464757</FolioId>                    <!-- CRS folio id (unique if >0, default age group if <0) [required, integer] {folUId} -->
+      <Document1Id>30132</Document1Id>             <!-- CRS id of a default document #1 [optional, integer] {refPidDocument1Id} -->
+      <!--<Document2Id>30130</Document2Id>-->              <!-- CRS id of a default document #2 [optional, integer] {refPidDocument2Id} -->
+      <Primary>0</Primary>                         <!-- Primary folio indicator, domain: 1-primary, 0-non-primary [required, integer] {refPrimary} -->
+      <ProtectionNo>D2</ProtectionNo>              <!-- Protection number [optional, string(15)] {refTravelProtectionNo} -->
+      <Flex01>john2@jones.net</Flex01>             <!-- Flex field [optional, string(50) {refFlex01} -->
+    </Folio>
+  </FolioList>
+
+</ReqAssignFolio>]]></con:request><con:originalUri>http://localhost/</con:originalUri><con:assertion type="Simple Contains" id="334ad456-a350-44f0-8a83-a7d71a045053" name="Contains"><con:configuration><token/><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="properties" name="Properties" id="6026afbd-8cc4-42d4-a3ef-3aa571b6c158"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties/></con:config></con:testStep><con:testStep type="groovy" name="Run By Groovy Script" id="e3811b20-79ba-4149-8267-8208db1aa489"><con:settings/><con:config><script>//Groovy - run request from same TestCase
+def status = testRunner.runTestStepByName("ReqAddBooking_001")
+def result = status.getStatus().toString();
+log.info ("   ---- "+result)
+</script></con:config></con:testStep><con:setupScript>log.info "Hello world"</con:setupScript><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
